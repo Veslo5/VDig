@@ -30,7 +30,7 @@
     <ClCompile Include="VGameplay\Scenes\MenuScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vengine\Scene.cpp">
+    <ClCompile Include="Vengine\VScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="VGameplay\GridWorld.cpp">
@@ -48,9 +48,15 @@
     <ClCompile Include="VGameplay\Scenes\BoxScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vengine\DefaultScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Vengine\VTimer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vengine\Scene.h">
+    <ClInclude Include="Vengine\VScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vengine\SceneManager.h">
@@ -78,6 +84,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="VGameplay\Scenes\BoxScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vengine\DefaultScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Vengine\VTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

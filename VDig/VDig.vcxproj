@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\raylib_32_400\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\raylib_32_400\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,11 +152,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="VDig.cpp" />
-    <ClCompile Include="Vengine\Scene.cpp" />
+    <ClCompile Include="Vengine\DefaultScene.cpp" />
+    <ClCompile Include="Vengine\VScene.cpp" />
     <ClCompile Include="Vengine\SceneManager.cpp" />
     <ClCompile Include="Vengine\VAnimation.cpp" />
     <ClCompile Include="Vengine\VAtlas.cpp" />
     <ClCompile Include="Vengine\VGame.cpp" />
+    <ClCompile Include="Vengine\VTimer.cpp" />
     <ClCompile Include="VGameplay\GridWorld.cpp" />
     <ClCompile Include="VGameplay\Scenes\BoxScene.cpp" />
     <ClCompile Include="VGameplay\Scenes\GameScene.cpp" />
@@ -164,11 +166,13 @@
     <ClCompile Include="VGameplay\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Vengine\DefaultScene.h" />
     <ClInclude Include="Vengine\VAnimation.h" />
     <ClInclude Include="Vengine\VAtlas.h" />
-    <ClInclude Include="Vengine\Scene.h" />
+    <ClInclude Include="Vengine\VScene.h" />
     <ClInclude Include="Vengine\SceneManager.h" />
     <ClInclude Include="Vengine\VGame.h" />
+    <ClInclude Include="Vengine\VTimer.h" />
     <ClInclude Include="VGameplay\GridWorld.h" />
     <ClInclude Include="VGameplay\Scenes\BoxScene.h" />
     <ClInclude Include="VGameplay\Scenes\GameScene.h" />

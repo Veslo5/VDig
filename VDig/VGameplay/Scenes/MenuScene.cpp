@@ -1,6 +1,5 @@
 
 #include "MenuScene.h"
-#include "BoxScene.h"
 #include "raylib-cpp.hpp"
 #include "../../Vengine/VGame.h"
 #include "GameScene.h"
@@ -8,7 +7,7 @@
 #include <memory>
 
 
-	Vgameplay::MenuScene::MenuScene(std::string name, Vengine::VGame* game) : Scene(name, game), white(raylib::Color::White())
+	Vgameplay::MenuScene::MenuScene(std::string name, Vengine::VGame* game) : VScene(name, game), white(raylib::Color::White())
 	{
 	}
 
@@ -16,7 +15,6 @@
 
 	void Vgameplay::MenuScene::LoadContent()
 	{
-		std::cout << "Load MenuScene" << std::endl;
 		this->Game->Camera.SetTarget(raylib::Vector2(0, 0));
 		this->Game->Camera.SetOffset(raylib::Vector2(this->Game->WindowWidth / 2, this->Game->WindowHeight / 2));
 		this->Game->Camera.SetZoom(1.0f);
@@ -25,7 +23,6 @@
 
 	void Vgameplay::MenuScene::UnloadContent()
 	{
-		std::cout << "Unload MenuScene" << std::endl;		
 	}
 
 	void Vgameplay::MenuScene::Update(float deltaTime)
@@ -35,10 +32,10 @@
 			this->Game->SceneManager.ChangeScene<GameScene>("GameScene");
 		}
 
-		if (IsKeyPressed(KEY_RIGHT_ALT))
+		/*if (IsKeyPressed(KEY_RIGHT_ALT))
 		{
 			this->Game->SceneManager.ChangeScene<BoxScene>("BoxScene");
-		}
+		}*/
 
 		if (IsKeyDown(KEY_W)) {
 			this->Game->Camera.zoom += deltaTime;

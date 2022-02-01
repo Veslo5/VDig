@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "VScene.h"
 #include <memory>
 #include <stack>
 #include <string>
@@ -14,8 +14,8 @@ namespace Vengine {
 		SceneManager(VGame* game);
 		~SceneManager();
 
-		std::unique_ptr<Scene> CurrentScene;
-		std::stack<std::unique_ptr<Scene>> ScenesHolder;
+		std::unique_ptr<VScene> CurrentScene;
+		std::stack<std::unique_ptr<VScene>> ScenesHolder;
 
 		template <typename T>
 		void AddSceneStack(std::string name);
@@ -54,6 +54,7 @@ namespace Vengine {
 		else
 		{
 			CurrentScene->UnloadContent();
+			CurrentScene = nullptr;
 			CurrentScene = std::make_unique<T>(name, game);
 			CurrentScene->LoadContent();
 		}

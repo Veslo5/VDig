@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../../Vengine/Scene.h"
+#include "../../Vengine/VScene.h"
 #include "../../Vengine/VAtlas.h"
 #include "../../Vengine/VAnimation.h"
 #include"../GridWorld.h"
 
 namespace Vgameplay {
-	class GameScene : public Vengine::Scene
+	class GameScene : public Vengine::VScene
 	{
 	public:
 		GameScene(std::string name, Vengine::VGame* game);

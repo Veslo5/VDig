@@ -5,7 +5,7 @@
 #include "b2_body.h"
 
 
-Vgameplay::BoxScene::BoxScene(std::string name, Vengine::VGame* game) : Scene(name, game)
+Vgameplay::BoxScene::BoxScene(std::string name, Vengine::VGame* game) : VScene(name, game)
 {
 
 }

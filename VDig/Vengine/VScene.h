@@ -6,11 +6,11 @@
 
 namespace Vengine {
 	class VGame; // forward declaration
-	class Scene
+	class VScene
 	{
 	public:
-		Scene(std::string name, VGame* game);
-		virtual ~Scene();
+		VScene(std::string name, VGame* game);
+		virtual ~VScene();
 
 		std::string Name;
 

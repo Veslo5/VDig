@@ -1,10 +1,10 @@
 ﻿#pragma once
 
-#include "../../Vengine/Scene.h"
+#include "../../Vengine/VScene.h"
 
 
 namespace Vgameplay {
-	class BoxScene : public Vengine::Scene
+	class BoxScene : public Vengine::VScene
 	{
 	public:
 		BoxScene(std::string name, Vengine::VGame* game);

@@ -1,10 +1,10 @@
 #pragma once
 
 #include "raylib-cpp.hpp"
-#include "../../Vengine/Scene.h"
+#include "../../Vengine/VScene.h"
 
 namespace Vgameplay {	
-	class MenuScene : public Vengine::Scene
+	class MenuScene : public Vengine::VScene
 	{
 	public:
 		MenuScene(std::string name, Vengine::VGame* game);

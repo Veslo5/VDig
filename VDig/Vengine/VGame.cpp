@@ -1,19 +1,11 @@
 #include "VGame.h"
 #include "raylib-cpp.hpp"
-#include <stdexcept>
+#include "DefaultScene.h"
 
-
-
-Vengine::VGame::VGame(int width, int height, std::string caption, raylib::Color clearColor) : WindowWidth(width), WindowHeight(height), Caption(caption), Camera(),
-																							  ClearColor(clearColor), SceneManager(this),
-																							  Window(width,height, caption, true) // lateInitialization
+Vengine::VGame::VGame(int width, int height, std::string caption, raylib::Color clearColor) : WindowWidth(width), WindowHeight(height), Caption(caption),
+	ClearColor(clearColor),
+	Window(width, height, caption, true), SceneManager(this)
 {
-	if (this->WindowWidth == 0 && this->WindowHeight == 0)
-	{
-		this->WindowWidth = GetScreenWidth();
-		this->WindowHeight = GetScreenHeight();
-	}
-
 
 }
 
@@ -22,19 +14,34 @@ Vengine::VGame::~VGame() = default;
 
 void Vengine::VGame::Run()
 {
-	if (SceneManager.CurrentScene == nullptr)
+	Window.Init(this->WindowWidth, this->WindowHeight, this->Caption);
+
+	SetTargetFPS(60);	
+	Window.SetState(FLAG_WINDOW_RESIZABLE);
+	Window.SetState(FLAG_VSYNC_HINT);
+
+
+	if (this->WindowWidth == 0 && this->WindowHeight == 0)
 	{
-		throw std::runtime_error("Default scene must be provided!");
+		ToggleFullscreen();
+		this->WindowWidth = GetScreenWidth();
+		this->WindowHeight = GetScreenHeight();
 	}
 
-	Window.Init(this->WindowWidth, this->WindowHeight, this->Caption);
-	SetTargetFPS(60);	
 
-	Window.SetState(FLAG_WINDOW_RESIZABLE);
+	SceneManager.ChangeScene<DefaultScene>("Default");
 
+	// Loading before game loop
 	SceneManager.CurrentScene->LoadContent();
 
 	while (!Window.ShouldClose()) {
+
+		if (IsWindowResized())
+		{
+			this->WindowWidth = GetScreenWidth();
+			this->WindowHeight = GetScreenHeight();
+			TraceLog(LOG_INFO, "WINDOW: RESIZED");
+		}
 
 		SceneManager.CurrentScene->Update(GetFrameTime());
 

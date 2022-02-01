@@ -6,9 +6,9 @@
 
 bool startedPainting = false;
 
-Vgameplay::GameScene::GameScene(std::string name, Vengine::VGame* game) : Scene(name, game),
-MyGridWorld(32, 32, 50, 0),
-RenderTexture(32 * 50, 32 * 50),
+Vgameplay::GameScene::GameScene(std::string name, Vengine::VGame* game) : VScene(name, game),
+MyGridWorld(16, 16, 50, 0),
+RenderTexture(16 * 50, 16 * 50),
 AtlasTest("res/atlas.png",16,10),
 AnimTest("res/anim.png",4,1,0.5f)
 {
