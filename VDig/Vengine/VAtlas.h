@@ -1,15 +1,23 @@
 ﻿#pragma once
 #include "raylib-cpp.hpp"
 #include <vector>
+#include <memory>
 
 namespace Vengine
 {
-	class VAtlas : public raylib::Texture2D
+	class VAtlas
 	{
 	public:
-		VAtlas(const std::string& fileName, int columns, int rows);
-		~VAtlas();
+		VAtlas(const std::shared_ptr<raylib::Texture>& texture);
+		virtual ~VAtlas() = default;
 
-		std::vector<raylib::Rectangle> AtlasPositions;
+		virtual void CalculatePositions(int columns, int rows);
+		void Draw(unsigned int atlasPosition, const raylib::Vector2& pos) const;
+
+	private:
+	protected:
+		std::vector<raylib::Rectangle> atlasPositions;
+		std::shared_ptr<raylib::Texture> texture;
+
 	};
 }

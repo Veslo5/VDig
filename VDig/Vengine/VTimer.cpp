@@ -5,8 +5,6 @@ Vengine::VTimer::VTimer(float seconds, std::function<void()> callback, bool repe
 
 }
 
-Vengine::VTimer::~VTimer() = default;
-
 
 void Vengine::VTimer::Update(float deltaTime)
 {

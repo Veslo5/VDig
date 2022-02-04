@@ -9,8 +9,9 @@ class DefaultScene : public Vengine::VScene
 {
 public:
 	DefaultScene(std::string name, Vengine::VGame* game);
-	~DefaultScene();
+	~DefaultScene() override = default;
 
+	raylib::Camera2D Camera;
 	raylib::Texture2D Logo;
 	tweeny::tween<int> Tween;
 	Vengine::VTimer countdown;
@@ -22,6 +23,5 @@ public:
 	void UnloadContent() override;
 	void LoadContent() override;
 	void Update(float deltaTime) override;
-	void CameraDraw() override;
 	void Draw() override;
 };

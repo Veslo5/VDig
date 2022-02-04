@@ -5,10 +5,6 @@ Vengine::SceneManager::SceneManager(VGame* game) : CurrentScene(nullptr), game(g
 {	
 }
 
-Vengine::SceneManager::~SceneManager() = default;
-
-
-
 
 //void Vengine::SceneManager::AddScene(Scene* scene)
 //{

@@ -8,7 +8,7 @@ namespace Vgameplay {
 	{
 	public:
 		Tile(int gridX, int gridY, int posX, int posY, int size);
-		~Tile();
+		~Tile() = default;
 
 		const raylib::Vector2 GridPosition;
 		const raylib::Vector2 Position;

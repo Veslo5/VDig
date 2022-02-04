@@ -3,10 +3,9 @@
 #include "DefaultScene.h"
 
 Vengine::VGame::VGame(int width, int height, std::string caption, raylib::Color clearColor) : WindowWidth(width), WindowHeight(height), Caption(caption),
-	ClearColor(clearColor),
-	Window(width, height, caption, true), SceneManager(this)
+ClearColor(clearColor),
+Window(width, height, caption, true), SceneManager(this), DataManager()
 {
-
 }
 
 Vengine::VGame::~VGame() = default;
@@ -16,7 +15,7 @@ void Vengine::VGame::Run()
 {
 	Window.Init(this->WindowWidth, this->WindowHeight, this->Caption);
 
-	SetTargetFPS(60);	
+	SetTargetFPS(60);
 	Window.SetState(FLAG_WINDOW_RESIZABLE);
 	Window.SetState(FLAG_VSYNC_HINT);
 
@@ -43,18 +42,24 @@ void Vengine::VGame::Run()
 			TraceLog(LOG_INFO, "WINDOW: RESIZED");
 		}
 
+		if (this->SceneManager.ChangeSceneNextFrame == true)
+		{
+			SceneManager.CurrentScene->UnloadContent();
+			SceneManager.CurrentScene = std::move(SceneManager.FutureScene);
+			SceneManager.CurrentScene->LoadContent();
+			this->SceneManager.ChangeSceneNextFrame = false;
+		}
+
 		SceneManager.CurrentScene->Update(GetFrameTime());
 
-		BeginDrawing();
-			Window.ClearBackground(this->ClearColor);
+		SceneManager.CurrentScene->Draw();
 
-			this->Camera.BeginMode();
-			SceneManager.CurrentScene->CameraDraw();
-			this->Camera.EndMode();
-
-			SceneManager.CurrentScene->Draw();
-		EndDrawing();
 	}
 
 
+}
+
+void Vengine::VGame::ClearBackground()
+{
+	Window.ClearBackground(this->ClearColor);
 }

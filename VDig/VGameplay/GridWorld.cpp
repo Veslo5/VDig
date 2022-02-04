@@ -16,8 +16,6 @@ Vgameplay::GridWorld::GridWorld(const int width, const int height, const int siz
 	}
 }
 
-Vgameplay::GridWorld::~GridWorld() = default;
-
 std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtPos(int x, int y)
 {
 	const auto enumerator = std::find_if(TileWorld.begin(), TileWorld.end(),

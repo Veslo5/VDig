@@ -1,5 +1,6 @@
 #pragma once
 
+#include "VDataManager.h"
 #include "SceneManager.h"
 #include "raylib-cpp.hpp"
 
@@ -16,10 +17,10 @@ namespace Vengine {
 		raylib::Window Window;
 
 		SceneManager SceneManager;
-		
-		raylib::Camera2D Camera;
+		VDataManager DataManager;
 
 		void Run();
+		void ClearBackground();
 
 	private:
 

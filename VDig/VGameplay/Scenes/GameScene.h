@@ -1,5 +1,6 @@
 #pragma once
 
+#include <memory>
 #include "../../Vengine/VScene.h"
 #include "../../Vengine/VAtlas.h"
 #include "../../Vengine/VAnimation.h"
@@ -10,20 +11,21 @@ namespace Vgameplay {
 	{
 	public:
 		GameScene(std::string name, Vengine::VGame* game);
-		~GameScene();
+		~GameScene() override = default;
 
+		raylib::Camera2D Camera;
 		GridWorld MyGridWorld;
-		raylib::RenderTexture RenderTexture;
-		Vengine::VAtlas AtlasTest;
-		Vengine::VAnimation AnimTest;
+		bool startedPainting;
 
+		std::unique_ptr<Vengine::VAtlas>AtlasTest;
+		std::unique_ptr<Vengine::VAnimation> AnimTest;
+		std::unique_ptr<raylib::RenderTexture> RenderTexture;
 
 		raylib::Color Red = raylib::Color::Red();
 
 		void UnloadContent() override;
 		void LoadContent() override;
 		void Update(float deltaTime) override;
-		void CameraDraw() override;
 		void Draw() override;
 
 	private:

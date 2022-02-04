@@ -8,7 +8,7 @@ namespace Vengine
 	{
 	public:
 		VTimer(float seconds, std::function<void()> callback, bool repeat);
-		~VTimer();
+		~VTimer() = default;
 
 		void Update(float deltaTime);
 

@@ -18,7 +18,6 @@ namespace Vengine {
 		virtual void UnloadContent() = 0;
 		virtual void LoadContent() = 0;
 		virtual void Update(float deltaTime) = 0;
-		virtual void CameraDraw() = 0;
 		virtual void Draw() = 0;
 
 	private:

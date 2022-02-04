@@ -3,6 +3,7 @@
 #include  "b2_math.h"
 #include  "b2_world.h"
 #include "b2_body.h"
+#include "../../Vengine/VGame.h"
 
 
 Vgameplay::BoxScene::BoxScene(std::string name, Vengine::VGame* game) : VScene(name, game)
@@ -26,11 +27,11 @@ void Vgameplay::BoxScene::Update(float deltaTime)
 {
 }
 
-void Vgameplay::BoxScene::CameraDraw()
-{
-}
-
 void Vgameplay::BoxScene::Draw()
 {
+	BeginDrawing();
+	this->Game->ClearBackground();
+
 	raylib::Color::White().DrawRectangle(100, 100, 100, 100);
+	EndDrawing();
 }

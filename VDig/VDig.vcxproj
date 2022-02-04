@@ -152,7 +152,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="VDig.cpp" />
+    <ClCompile Include="Vengine\VDataHolder.cpp" />
+    <ClCompile Include="Vengine\VDataManager.cpp" />
     <ClCompile Include="Vengine\DefaultScene.cpp" />
+    <ClCompile Include="Vengine\VObjectHolder.cpp" />
+    <ClCompile Include="Vengine\VPersistentData.cpp" />
     <ClCompile Include="Vengine\VScene.cpp" />
     <ClCompile Include="Vengine\SceneManager.cpp" />
     <ClCompile Include="Vengine\VAnimation.cpp" />
@@ -166,9 +170,13 @@
     <ClCompile Include="VGameplay\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Vengine\VDataHolder.h" />
+    <ClInclude Include="Vengine\VDataManager.h" />
     <ClInclude Include="Vengine\DefaultScene.h" />
     <ClInclude Include="Vengine\VAnimation.h" />
     <ClInclude Include="Vengine\VAtlas.h" />
+    <ClInclude Include="Vengine\VObjectHolder.h" />
+    <ClInclude Include="Vengine\VPersistentData.h" />
     <ClInclude Include="Vengine\VScene.h" />
     <ClInclude Include="Vengine\SceneManager.h" />
     <ClInclude Include="Vengine\VGame.h" />

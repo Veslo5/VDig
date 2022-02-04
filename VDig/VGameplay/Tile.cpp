@@ -9,5 +9,3 @@ Vgameplay::Tile::Tile(int gridX, int gridY, int posX, int posY, int size) :
 {
 
 }
-
-Vgameplay::Tile::~Tile() = default;

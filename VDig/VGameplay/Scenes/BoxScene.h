@@ -13,7 +13,6 @@ namespace Vgameplay {
 		void UnloadContent() override;
 		void LoadContent() override;
 		void Update(float deltaTime) override;
-		void CameraDraw() override;
 		void Draw() override;
 
 	};

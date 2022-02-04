@@ -12,10 +12,14 @@ namespace Vengine {
 	{
 	public:
 		SceneManager(VGame* game);
-		~SceneManager();
+		~SceneManager() = default;
 
 		std::unique_ptr<VScene> CurrentScene;
+		std::unique_ptr<VScene> FutureScene;
+
 		std::stack<std::unique_ptr<VScene>> ScenesHolder;
+		bool ChangeSceneNextFrame;
+
 
 		template <typename T>
 		void AddSceneStack(std::string name);
@@ -53,10 +57,8 @@ namespace Vengine {
 		}
 		else
 		{
-			CurrentScene->UnloadContent();
-			CurrentScene = nullptr;
-			CurrentScene = std::make_unique<T>(name, game);
-			CurrentScene->LoadContent();
+			this->ChangeSceneNextFrame = true;
+			FutureScene = std::make_unique<T>(name, game);
 		}
 
 	}

@@ -10,14 +10,15 @@ namespace Vgameplay {
 		MenuScene(std::string name, Vengine::VGame* game);
 		~MenuScene();
 
+		raylib::Camera2D Camera;
+
 		void UnloadContent() override;
 		void LoadContent() override;
 		void Update(float deltaTime) override;
-		void CameraDraw () override;
 		void Draw() override;
 
 	private:
-		
+
 		raylib::Color white;
 		std::unique_ptr<raylib::Texture2D> sprite;
 

@@ -1,12 +1,16 @@
 ﻿#include "VAnimation.h"
 
-Vengine::VAnimation::VAnimation(const std::string& fileName, int columns, int rows, float timePerFrame) :
-	Vengine::VAtlas(fileName, columns, rows),
-	CurrentFrame(0), timePerFrame(timePerFrame), currentFrameTime(0), totalFrames(columns* rows)
+Vengine::VAnimation::VAnimation(const std::shared_ptr<raylib::Texture>& texture, const float timePerFrame) : Vengine::VAtlas(texture),
+CurrentFrame(0), timePerFrame(timePerFrame), currentFrameTime(0), totalFrames(0)
 {
 }
 
-Vengine::VAnimation::~VAnimation() = default;
+
+void Vengine::VAnimation::CalculatePositions(int columns, int rows)
+{
+	totalFrames = columns * rows;
+	VAtlas::CalculatePositions(columns, rows);
+}
 
 void Vengine::VAnimation::Update(float deltaTime)
 {
@@ -28,4 +32,9 @@ void Vengine::VAnimation::Update(float deltaTime)
 	}
 	//CurrentFrame =  static_cast<unsigned int>(deltaTime * 1000) / static_cast<unsigned int>(timePerFrame);
 	//CurrentFrame = CurrentFrame % totalFrames;
+}
+
+void Vengine::VAnimation::Draw(const raylib::Rectangle destRectangle)
+{
+	texture->Draw(atlasPositions[CurrentFrame], destRectangle);
 }
