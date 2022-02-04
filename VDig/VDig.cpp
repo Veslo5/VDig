@@ -1,6 +1,5 @@
 #include "raylib-cpp.hpp"
-#include "Vengine/VGame.h"
-#include "VGameplay/Scenes/MenuScene.h"
+#include "VGame.h"
 
 int main() {
 

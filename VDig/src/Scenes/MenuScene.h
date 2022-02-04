@@ -1,7 +1,7 @@
 #pragma once
 
 #include "raylib-cpp.hpp"
-#include "../../Vengine/VScene.h"
+#include "VScene.h"
 
 namespace Vgameplay {	
 	class MenuScene : public Vengine::VScene

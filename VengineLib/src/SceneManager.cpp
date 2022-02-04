@@ -1,4 +1,4 @@
-#include "SceneManager.h"
+#include "../include/SceneManager.h"
 #include <algorithm>	
 
 Vengine::SceneManager::SceneManager(VGame* game) : CurrentScene(nullptr), game(game)

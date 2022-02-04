@@ -1,9 +1,9 @@
 #pragma once
 
 #include <memory>
-#include "../../Vengine/VScene.h"
-#include "../../Vengine/VAtlas.h"
-#include "../../Vengine/VAnimation.h"
+#include "VScene.h"
+#include "VAtlas.h"
+#include "VAnimation.h"
 #include"../GridWorld.h"
 
 namespace Vgameplay {

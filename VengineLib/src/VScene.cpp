@@ -1,4 +1,4 @@
-#include "VScene.h"
+#include "../include/VScene.h"
 #include "raylib-cpp.hpp"
 
 Vengine::VScene::VScene(std::string name, VGame* game) : Name(name), Game(game)

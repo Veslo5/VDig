@@ -1,6 +1,6 @@
 #include "GameScene.h"
 
-#include "../../Vengine/VGame.h"
+#include "VGame.h"
 #include "MenuScene.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"

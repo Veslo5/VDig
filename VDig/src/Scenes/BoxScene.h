@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "../../Vengine/VScene.h"
+#include "VScene.h"
 
 
 namespace Vgameplay {

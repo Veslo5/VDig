@@ -1,4 +1,4 @@
-﻿#include "VTimer.h"
+﻿#include "../include/VTimer.h"
 
 Vengine::VTimer::VTimer(float seconds, std::function<void()> callback, bool repeat) : startingTime(seconds), currentTime(seconds), callback(callback), repeat(repeat), done(false)
 {

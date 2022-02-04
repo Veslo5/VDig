@@ -18,102 +18,36 @@
     <ClCompile Include="VDig.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vengine\SceneManager.cpp">
+    <ClCompile Include="src\Scenes\GameScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vengine\VGame.cpp">
+    <ClCompile Include="src\Scenes\MenuScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VGameplay\Scenes\GameScene.cpp">
+    <ClCompile Include="src\GridWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VGameplay\Scenes\MenuScene.cpp">
+    <ClCompile Include="src\Tile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vengine\VScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VGameplay\GridWorld.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VGameplay\Tile.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VAtlas.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VAnimation.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VGameplay\Scenes\BoxScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\DefaultScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VTimer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VDataManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VDataHolder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VPersistentData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vengine\VObjectHolder.cpp">
+    <ClCompile Include="src\Scenes\BoxScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vengine\VScene.h">
+    <ClInclude Include="src\Scenes\GameScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vengine\SceneManager.h">
+    <ClInclude Include="src\Scenes\MenuScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vengine\VGame.h">
+    <ClInclude Include="src\GridWorld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VGameplay\Scenes\GameScene.h">
+    <ClInclude Include="src\Tile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VGameplay\Scenes\MenuScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VGameplay\GridWorld.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VGameplay\Tile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VAtlas.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VAnimation.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VGameplay\Scenes\BoxScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\DefaultScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VTimer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VDataManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VDataHolder.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VPersistentData.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Vengine\VObjectHolder.h">
+    <ClInclude Include="src\Scenes\BoxScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

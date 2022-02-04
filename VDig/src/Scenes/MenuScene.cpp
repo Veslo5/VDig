@@ -1,7 +1,7 @@
 
 #include "MenuScene.h"
 #include "raylib-cpp.hpp"
-#include "../../Vengine/VGame.h"
+#include "VGame.h"
 #include "GameScene.h"
 #include <iostream>
 #include <memory>

@@ -1,6 +1,6 @@
-#include "VGame.h"
+#include "../include/VGame.h"
 #include "raylib-cpp.hpp"
-#include "DefaultScene.h"
+#include "../include/DefaultScene.h"
 
 Vengine::VGame::VGame(int width, int height, std::string caption, raylib::Color clearColor) : WindowWidth(width), WindowHeight(height), Caption(caption),
 ClearColor(clearColor),

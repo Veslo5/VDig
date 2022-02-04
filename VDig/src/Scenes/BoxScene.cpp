@@ -3,7 +3,7 @@
 #include  "b2_math.h"
 #include  "b2_world.h"
 #include "b2_body.h"
-#include "../../Vengine/VGame.h"
+#include "VGame.h"
 
 
 Vgameplay::BoxScene::BoxScene(std::string name, Vengine::VGame* game) : VScene(name, game)

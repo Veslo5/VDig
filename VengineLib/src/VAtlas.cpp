@@ -1,4 +1,4 @@
-﻿#include "VAtlas.h"
+﻿#include "../include/VAtlas.h"
 
 Vengine::VAtlas::VAtlas(const std::shared_ptr<raylib::Texture>& texture) : texture(texture)
 {

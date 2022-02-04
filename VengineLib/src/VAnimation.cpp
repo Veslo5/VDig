@@ -1,4 +1,4 @@
-﻿#include "VAnimation.h"
+﻿#include "../include/VAnimation.h"
 
 Vengine::VAnimation::VAnimation(const std::shared_ptr<raylib::Texture>& texture, const float timePerFrame) : Vengine::VAtlas(texture),
 CurrentFrame(0), timePerFrame(timePerFrame), currentFrameTime(0), totalFrames(0)
