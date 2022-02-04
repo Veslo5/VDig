@@ -7,4 +7,5 @@ Dependencies
 | ------------- | ------------- | ------------- |
 | Raylib  | https://github.com/raysan5/raylib  | Statically |
 | Raylib-Cpp | https://github.com/RobLoach/raylib-cpp  | Integrated(wrapper) |
+| Tweeny | https://github.com/mobius3/tweeny  | Integrated |
 | Box2D  | https://github.com/erincatto/box2d/tree/v2.4.1  | Statically |
