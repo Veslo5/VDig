@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;$(SolutionDir)VengineLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;$(SolutionDir)VengineLib\include;$(SolutionDir)Dependencies\fastNoiseLite\include;$(SolutionDir)Dependencies\AStar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;$(SolutionDir)VengineLib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\raylibcpp_wrapper_404\include;$(SolutionDir)Dependencies\box2D_241\include;$(SolutionDir)Dependencies\tweeny_320\include;$(SolutionDir)Dependencies\raylib_32_400\include;$(SolutionDir)VengineLib\include;$(SolutionDir)Dependencies\fastNoiseLite\include;$(SolutionDir)Dependencies\AStar\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +151,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\AStar\AStar.cpp" />
     <ClCompile Include="VDig.cpp" />
     <ClCompile Include="src\GridWorld.cpp" />
     <ClCompile Include="src\Scenes\BoxScene.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="src\Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\AStar\AStar.hpp" />
     <ClInclude Include="src\GridWorld.h" />
     <ClInclude Include="src\Scenes\BoxScene.h" />
     <ClInclude Include="src\Scenes\GameScene.h" />

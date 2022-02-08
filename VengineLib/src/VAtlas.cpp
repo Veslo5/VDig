@@ -6,6 +6,8 @@ Vengine::VAtlas::VAtlas(const std::shared_ptr<raylib::Texture>& texture) : textu
 
 void Vengine::VAtlas::CalculatePositions(int columns, int rows)
 {
+	this->Columns = columns;
+	this->Rows = rows;
 
 	int tileWidth = texture->width / columns;
 	int tileHeight = texture->height / rows;
@@ -17,6 +19,11 @@ void Vengine::VAtlas::CalculatePositions(int columns, int rows)
 			atlasPositions.emplace_back(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
 		}
 	}
+}
+
+int Vengine::VAtlas::GetIndexFromPosition(int column, int row) const
+{
+	return (row * this->Columns) + column;
 }
 
 void Vengine::VAtlas::Draw(const unsigned int atlasPosition, const raylib::Vector2& pos) const

@@ -7,12 +7,13 @@ namespace Vgameplay {
 	class Tile
 	{
 	public:
-		Tile(int gridX, int gridY, int posX, int posY, int size);
+		Tile(int gridX, int gridY, int posX, int posY, int size, int atlasPosition = 0);
 		~Tile() = default;
 
 		const raylib::Vector2 GridPosition;
-		const raylib::Vector2 Position;
+		const raylib::Vector2 WorldPosition;
 		const int Size;
+		int AtlasPosition;
 
 	private:
 

@@ -1,8 +1,8 @@
 #include "GridWorld.h"
 #include <algorithm>
+#include <cmath>
 
-Vgameplay::GridWorld::GridWorld(const int width, const int height, const int size, const int spacing) :
-	TileWorld()
+Vgameplay::GridWorld::GridWorld(const int width, const int height, const int size, const int spacing) : TilesSize(size), Height(height), Width(width)
 {
 	for (int gridX = 0; gridX < width; gridX++)
 	{
@@ -30,4 +30,15 @@ std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtPos(int x, int y)
 	}
 
 	return {};
+}
+
+std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtWorldPos(int x, int y)
+{
+	int column = x / TilesSize;
+	int row = y / TilesSize;
+
+	
+
+
+	return this->GetTileAtPos(column, row);
 }

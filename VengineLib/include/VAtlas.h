@@ -14,6 +14,11 @@ namespace Vengine
 		virtual void CalculatePositions(int columns, int rows);
 		void Draw(unsigned int atlasPosition, const raylib::Vector2& pos) const;
 
+		int GetIndexFromPosition(int column, int row) const;
+
+		int Columns;
+		int Rows;
+
 	private:
 	protected:
 		std::vector<raylib::Rectangle> atlasPositions;

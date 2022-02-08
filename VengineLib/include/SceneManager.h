@@ -29,6 +29,10 @@ namespace Vengine {
 
 		template <typename T>
 		void ChangeScene(std::string name);
+
+		template <typename T>
+		void SetFirstScene(const std::string& name);
+
 	private:
 
 		VGame* game;
@@ -61,6 +65,12 @@ namespace Vengine {
 			FutureScene = std::make_unique<T>(name, game);
 		}
 
+	}
+
+	template <typename T>
+	void SceneManager::SetFirstScene(const std::string& name)
+	{
+		FutureScene = std::make_unique<T>(name, game);
 	}
 }
 

@@ -1,8 +1,6 @@
 ﻿#include "../include/DefaultScene.h"
 #include "../include/VGame.h"
 
-//#include "../VGameplay/Scenes/MenuScene.h"
-
 DefaultScene::DefaultScene(std::string name, Vengine::VGame* game) : VScene(name, game), Logo("res/logo.png"),
 countdown(1.5f, [this]() { TimerCallback(); }, false), LogoTy(0)
 
@@ -11,8 +9,7 @@ countdown(1.5f, [this]() { TimerCallback(); }, false), LogoTy(0)
 
 void DefaultScene::TimerCallback()
 {
-	//TODO: this must be independent of Vgameplay!
-	//Game->SceneManager.ChangeScene<Vgameplay::MenuScene>("Menu");
+	this->Game->SceneManager.ChangeSceneNextFrame = true;
 }
 
 void DefaultScene::UnloadContent()
