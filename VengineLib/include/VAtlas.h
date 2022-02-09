@@ -13,6 +13,7 @@ namespace Vengine
 
 		virtual void CalculatePositions(int columns, int rows);
 		void Draw(unsigned int atlasPosition, const raylib::Vector2& pos) const;
+		void Draw(unsigned atlasPosition, const raylib::Vector2& pos, raylib::Color color) const;
 
 		int GetIndexFromPosition(int column, int row) const;
 

@@ -15,9 +15,9 @@ void Vengine::VGame::Run()
 {
 	Window.Init(this->WindowWidth, this->WindowHeight, this->Caption);
 
-	SetTargetFPS(60);
-	Window.SetState(FLAG_WINDOW_RESIZABLE);
+	//SetTargetFPS(60);
 	Window.SetState(FLAG_VSYNC_HINT);
+	Window.SetState(FLAG_WINDOW_RESIZABLE);
 
 
 	if (this->WindowWidth == 0 && this->WindowHeight == 0)

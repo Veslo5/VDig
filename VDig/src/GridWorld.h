@@ -17,6 +17,7 @@ namespace Vgameplay
 		int Width;
 		int Height;
 
+		raylib::Vector2 GetVectorAlignedToGrid(const raylib::Vector2& position) const;
 		std::vector<std::shared_ptr<Tile>> TileWorld;
 		std::weak_ptr<Tile> GetTileAtPos(int x, int y);
 		std::weak_ptr<Tile> GetTileAtWorldPos(int x, int y);

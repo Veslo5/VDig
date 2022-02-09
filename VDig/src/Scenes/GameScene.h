@@ -37,7 +37,7 @@ namespace Vgameplay {
 	private:
 		void generateGrid();
 		void loadPath();
-		float cameraZoom = 0.f;
+		float cameraZoom = 3.f;
 		std::future<void> task;
 	};
 

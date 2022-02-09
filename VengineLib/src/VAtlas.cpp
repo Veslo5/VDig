@@ -30,3 +30,8 @@ void Vengine::VAtlas::Draw(const unsigned int atlasPosition, const raylib::Vecto
 {
 	texture->Draw(this->atlasPositions[atlasPosition], pos);
 }
+
+void Vengine::VAtlas::Draw(const unsigned int atlasPosition, const raylib::Vector2& pos, raylib::Color color) const
+{
+	texture->Draw(this->atlasPositions[atlasPosition], pos, color);
+}

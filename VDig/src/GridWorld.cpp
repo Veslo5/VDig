@@ -16,6 +16,11 @@ Vgameplay::GridWorld::GridWorld(const int width, const int height, const int siz
 	}
 }
 
+raylib::Vector2 Vgameplay::GridWorld::GetVectorAlignedToGrid(const raylib::Vector2& position) const
+{
+	return { floor((position.x / TilesSize)) * TilesSize, floor((position.y / TilesSize)) * TilesSize };
+}
+
 std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtPos(int x, int y)
 {
 	const auto enumerator = std::find_if(TileWorld.begin(), TileWorld.end(),
@@ -37,7 +42,7 @@ std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtWorldPos(int x, in
 	int column = x / TilesSize;
 	int row = y / TilesSize;
 
-	
+
 
 
 	return this->GetTileAtPos(column, row);
