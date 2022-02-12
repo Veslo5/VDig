@@ -2,13 +2,12 @@
 #include "VGame.h"
 #include "MenuScene.h"
 #include "FastNoiseLite.h"
+#include "../TileBuilder.h"
 
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 
-raylib::Vector2 pos1 = { 0,0 };
-raylib::Vector2 pos2 = { 0,0 };
-bool firstSet = false;
+Vgameplay::TileBuilder builder;
 
 Vgameplay::GameScene::GameScene(std::string name, Vengine::VGame* game) : VScene(name, game),
 MyGridWorld(32, 32, 8, 0)
@@ -21,22 +20,13 @@ void Vgameplay::GameScene::LoadContent()
 {
 	this->Camera.SetTarget(raylib::Vector2(0, 0));
 
-	this->Game->DataManager.TextureHolder.AddToLoadingQueue("res/atlas.png");
-	this->Game->DataManager.TextureHolder.AddToLoadingQueue("res/anim.png");
 	this->Game->DataManager.TextureHolder.AddToLoadingQueue("res/tileset.png");
 	this->Game->DataManager.LoadAll();
 
-	AtlasTest = std::make_unique<Vengine::VAtlas>(this->Game->DataManager.TextureHolder.GetTexture("res/atlas.png"));
-	AnimTest = std::make_unique<Vengine::VAnimation>(this->Game->DataManager.TextureHolder.GetTexture("res/anim.png"));
 	GameTileSet = std::make_unique<Vengine::VAtlas>(this->Game->DataManager.TextureHolder.GetTexture("res/tileset.png"));
 
-	RenderTexture = std::make_unique<raylib::RenderTexture>(32 * 8, 32 * 8);
-	PathFinder.setWorldSize({ 32,32 });
-	PathFinder.setHeuristic(AStar::Heuristic::euclidean);
-	PathFinder.setDiagonalMovement(false);
+	RenderTexture = std::make_unique<raylib::RenderTexture>(MyGridWorld.GetPixelSizeX(), MyGridWorld.GetPixelSizeY());
 
-	AtlasTest->CalculatePositions(16, 10);
-	AnimTest->CalculatePositions(4, 1);
 	GameTileSet->CalculatePositions(23, 21);
 
 	this->generateGrid();
@@ -56,53 +46,33 @@ void Vgameplay::GameScene::Update(float deltaTime)
 
 	if (IsMouseButtonPressed(0))
 	{
-		auto pos = GetScreenToWorld2D(GetMousePosition(), Camera);
-		auto tile = MyGridWorld.GetTileAtWorldPos(pos.x, pos.y);
 
-		if (!tile.expired())
+
+		/*if (MyGridWorld.SetTileDataWorldPos(pos.x, pos.y, 0))
 		{
-			if (auto lockedTile = tile.lock())
-			{
-				lockedTile->AtlasPosition = 0;
-				startedPainting = false;
-			}
-		}
+			startedPainting = false;
+		}*/
 
+	}
 
+	if(IsMouseButtonDown(0))
+	{
+		auto pos = GetScreenToWorld2D(GetMousePosition(), Camera);
+		builder.CalculateTiles(MyGridWorld.GetGridPositionFromWorldPosition(pos));
+	}
+
+	if (IsMouseButtonReleased(0))
+	{
+		builder.EndCalculation();
 	}
 
 
 	if (IsMouseButtonPressed(1))
 	{
-
 		auto pos = GetScreenToWorld2D(GetMousePosition(), Camera);
-		auto tile = MyGridWorld.GetTileAtWorldPos(pos.x, pos.y);
+		auto* tile = MyGridWorld.GetTileAtWorldPos(pos);
 
-		if (!tile.expired())
-		{
-			if (firstSet == false)
-			{
-				if (auto lockedTile = tile.lock())
-				{
-					pos1 = lockedTile->GridPosition;
-				}
-				firstSet = true;
-			}else
-			{
-				if (auto lockedTile = tile.lock())
-				{
-					pos2 = lockedTile->GridPosition;
-				}
-				firstSet = false;
-
-				task = std::async(std::launch::async, &GameScene::loadPath, this);
-				
-			}
-
-		}
 	}
-
-
 
 	if (IsKeyPressed(KEY_SPACE))
 	{
@@ -131,10 +101,6 @@ void Vgameplay::GameScene::Update(float deltaTime)
 	{
 		this->generateGrid();
 	}
-
-	AnimTest->Update(deltaTime);
-
-
 }
 
 void Vgameplay::GameScene::Draw()
@@ -145,8 +111,7 @@ void Vgameplay::GameScene::Draw()
 		{
 			ClearBackground(Game->ClearColor);
 
-
-			for (const std::shared_ptr<Tile>& element : MyGridWorld.TileWorld)
+			for (const std::unique_ptr<Tile>& element : MyGridWorld.TileWorld)
 			{
 
 				GameTileSet->Draw(element->AtlasPosition, element->WorldPosition);
@@ -164,21 +129,16 @@ void Vgameplay::GameScene::Draw()
 
 		Camera.BeginMode();
 		DrawTextureRec(RenderTexture->texture, raylib::Rectangle(0, 0, RenderTexture->texture.width, -RenderTexture->texture.height), raylib::Vector2(0, 0), raylib::Color::White());
-		GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9, 13), MyGridWorld.GetVectorAlignedToGrid(Camera.GetScreenToWorld(GetMousePosition())), raylib::Color(255,255,255,127));
+		//GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9, 13), MyGridWorld.GetVectorAlignedToGrid(Camera.GetScreenToWorld(GetMousePosition())), raylib::Color(255, 255, 255, 127));
+		for (const auto& selected_tile : builder.SelectedTiles)
+		{
+			GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9,13), MyGridWorld.GetWorldPositionFromGridPosition(selected_tile));
+		}
+
 		Camera.EndMode();
 
 
 		DrawFPS(0, 0);
-
-
-		//AnimTest.Draw(AnimTest.AtlasPositions[AnimTest.CurrentFrame],  raylib::Vector2(64, 80));
-		AnimTest->Draw(raylib::Rectangle(64, 80, 100, 100));
-		AtlasTest->Draw(0, raylib::Vector2(8, 80));
-		AtlasTest->Draw(1, raylib::Vector2(16, 80));
-		AtlasTest->Draw(2, raylib::Vector2(24, 80));
-		AtlasTest->Draw(3, raylib::Vector2(32, 80));
-		AtlasTest->Draw(4, raylib::Vector2(40, 80));
-		AtlasTest->Draw(5, raylib::Vector2(48, 80));
 
 	}
 	EndDrawing();
@@ -208,7 +168,7 @@ void Vgameplay::GameScene::generateGrid()
 	noiseGold.SetFractalWeightedStrength(1);
 
 
-	for (const std::shared_ptr<Tile>& tile_world : MyGridWorld.TileWorld)
+	for (const std::unique_ptr<Tile>& tile_world : MyGridWorld.TileWorld)
 	{
 		tile_world->AtlasPosition = 0;
 
@@ -218,7 +178,6 @@ void Vgameplay::GameScene::generateGrid()
 		if (treeF < 0.1f)
 		{
 			//tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(9, 11);
-			PathFinder.addCollision({ static_cast<int>(tile_world->GridPosition.x) , static_cast<int>(tile_world->GridPosition.y) });
 			tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(8, 11);
 		}
 		else if (treeF < 0.5f && treeF > 0.1f)
@@ -238,25 +197,21 @@ void Vgameplay::GameScene::generateGrid()
 		//# WALLS
 		if (tile_world->GridPosition.x == 0)
 		{
-			PathFinder.addCollision({ static_cast<int>(tile_world->GridPosition.x) , static_cast<int>(tile_world->GridPosition.y) });
 			tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(0, 15);
 		}
 
 		if (tile_world->GridPosition.y == 0)
 		{
-			PathFinder.addCollision({ static_cast<int>(tile_world->GridPosition.x) , static_cast<int>(tile_world->GridPosition.y) });
 			tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(3, 15);
 		}
 
 		if (tile_world->GridPosition.x == MyGridWorld.Width - 1)
 		{
-			PathFinder.addCollision({ static_cast<int>(tile_world->GridPosition.x) , static_cast<int>(tile_world->GridPosition.y) });
 			tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(5, 15);
 		}
 
 		if (tile_world->GridPosition.y == MyGridWorld.Height - 1)
 		{
-			PathFinder.addCollision({ static_cast<int>(tile_world->GridPosition.x) , static_cast<int>(tile_world->GridPosition.y) });
 			tile_world->AtlasPosition = GameTileSet->GetIndexFromPosition(3, 15);
 		}
 		//# END WALLS
@@ -266,19 +221,6 @@ void Vgameplay::GameScene::generateGrid()
 	startedPainting = false;
 }
 
-void Vgameplay::GameScene::loadPath()
-{
-	auto path = PathFinder.findPath({ static_cast<int>(pos1.x), static_cast<int>(pos1.y) }, { static_cast<int>(pos2.x), static_cast<int>(pos2.y) });
 
-	for (auto& vec2_i : path)
-	{
-		auto tile = MyGridWorld.GetTileAtPos(vec2_i.x, vec2_i.y);
-		if (auto lockedTile = tile.lock())
-		{
-			lockedTile->AtlasPosition = GameTileSet->GetIndexFromPosition(14, 1);
-		}
-	}
-	startedPainting = false;
 
-}
 

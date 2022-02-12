@@ -8,42 +8,96 @@ Vgameplay::GridWorld::GridWorld(const int width, const int height, const int siz
 	{
 		for (int gridY = 0; gridY < height; gridY++)
 		{
-			auto posX = (gridX * size) + spacing;
-			auto posY = (gridY * size) + spacing;
+			const auto posX = (gridX * size) + spacing;
+			const auto posY = (gridY * size) + spacing;
 
-			TileWorld.push_back(std::make_shared<Vgameplay::Tile>(gridX, gridY, posX, posY, size));
+			TileWorld.push_back(std::make_unique<Vgameplay::Tile>(raylib::Vector2(gridX, gridY), raylib::Vector2(posX, posY), size));
 		}
 	}
 }
 
-raylib::Vector2 Vgameplay::GridWorld::GetVectorAlignedToGrid(const raylib::Vector2& position) const
+int Vgameplay::GridWorld::GetPixelSizeX() const
 {
-	return { floor((position.x / TilesSize)) * TilesSize, floor((position.y / TilesSize)) * TilesSize };
+	return Width * TilesSize;
 }
 
-std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtPos(int x, int y)
+int Vgameplay::GridWorld::GetPixelSizeY() const
+{
+	return Height * TilesSize;
+}
+
+bool Vgameplay::GridWorld::SetTileDataGridPos(raylib::Vector2 gridPosition, int newAtlasPosition)
+{
+	if (Tile* tile = GetTileAtGridPos(gridPosition))
+	{
+		tile->AtlasPosition = newAtlasPosition;
+		return true;
+	}
+	return false;
+}
+
+bool Vgameplay::GridWorld::SetTileDataWorldPos(raylib::Vector2 worldPosition, int newAtlasPosition)
+{
+	if (Tile* tile = GetTileAtWorldPos(worldPosition))
+	{
+		tile->AtlasPosition = newAtlasPosition;
+		return true;
+	}
+	return false;
+}
+
+bool Vgameplay::GridWorld::IsTileExistOnGridPos(raylib::Vector2 gridPosition) const
+{
+	if (Tile* tile = GetTileAtGridPos(gridPosition))
+	{
+		return true;
+	}
+	return false;
+}
+
+raylib::Vector2 Vgameplay::GridWorld::GetWorldPositionFromGridPosition(raylib::Vector2 gridPosition) const
+{
+	return { floor(gridPosition.x * TilesSize), floor(gridPosition.y * TilesSize) };
+}
+
+raylib::Vector2 Vgameplay::GridWorld::GetGridPositionFromWorldPosition(raylib::Vector2 worldPosition) const
+{
+	return { floor(worldPosition.x / TilesSize), floor(worldPosition.y / TilesSize) };
+}
+
+
+Vgameplay::Tile* Vgameplay::GridWorld::GetTileAtGridPos(raylib::Vector2 gridPosition) const
 {
 	const auto enumerator = std::find_if(TileWorld.begin(), TileWorld.end(),
-		[&](const std::shared_ptr<Vgameplay::Tile>& tile) -> bool
+		[&gridPosition](const std::unique_ptr<Vgameplay::Tile>& tile) -> bool
 		{
-			return static_cast<int>(tile->GridPosition.x) == x && static_cast<int>(tile
-				->GridPosition.y) == y;
+			return gridPosition == tile->GridPosition;
 		});
+
 	if (enumerator != TileWorld.end())
 	{
-		return *enumerator;
+		return enumerator->get();
 	}
 
-	return {};
+	return nullptr;
 }
 
-std::weak_ptr<Vgameplay::Tile> Vgameplay::GridWorld::GetTileAtWorldPos(int x, int y)
+Vgameplay::Tile* Vgameplay::GridWorld::GetTileAtWorldPos(raylib::Vector2 worldPosition) const
 {
-	int column = x / TilesSize;
-	int row = y / TilesSize;
+	const float column = worldPosition.x / static_cast<float>(TilesSize);
+	const float row = worldPosition.y / static_cast<float>(TilesSize);
 
+	return this->GetTileAtGridPos({ column, row });
+}
 
+Vgameplay::Tile* Vgameplay::GridWorld::GetTileAtGridPosIndex(raylib::Vector2 gridPosition) const
+{
+	const int pos = (static_cast<int>(gridPosition.y) * this->Width) + static_cast<int>(gridPosition.x);
 
+	if (pos < 0 || pos > TileWorld.size())
+	{
+		return nullptr;
+	}
 
-	return this->GetTileAtPos(column, row);
+	return TileWorld.at(pos).get();
 }

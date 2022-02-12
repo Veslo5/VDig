@@ -152,6 +152,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\AStar\AStar.cpp" />
+    <ClCompile Include="src\TileBuilder.cpp" />
     <ClCompile Include="VDig.cpp" />
     <ClCompile Include="src\GridWorld.cpp" />
     <ClCompile Include="src\Scenes\BoxScene.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="src\Scenes\GameScene.h" />
     <ClInclude Include="src\Scenes\MenuScene.h" />
     <ClInclude Include="src\Tile.h" />
+    <ClInclude Include="src\TileBuilder.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\VengineLib\VengineLib.vcxproj">

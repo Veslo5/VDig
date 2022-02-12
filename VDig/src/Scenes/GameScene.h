@@ -6,7 +6,6 @@
 #include "VAnimation.h"
 #include "../GridWorld.h"
 #include "../AStar/AStar.hpp"
-#include <future>
 
 namespace Vgameplay {
 	class GameScene : public Vengine::VScene
@@ -18,11 +17,7 @@ namespace Vgameplay {
 		raylib::Camera2D Camera;
 		GridWorld MyGridWorld;
 		bool startedPainting;
-		AStar::Generator PathFinder;
 
-
-		std::unique_ptr<Vengine::VAtlas>AtlasTest;
-		std::unique_ptr<Vengine::VAnimation> AnimTest;
 		std::unique_ptr<Vengine::VAtlas> GameTileSet;
 		std::unique_ptr<raylib::RenderTexture> RenderTexture;
 
@@ -36,9 +31,7 @@ namespace Vgameplay {
 
 	private:
 		void generateGrid();
-		void loadPath();
 		float cameraZoom = 3.f;
-		std::future<void> task;
 	};
 
 }
