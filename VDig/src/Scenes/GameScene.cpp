@@ -8,6 +8,7 @@
 #include "raygui.h"
 
 Vgameplay::TileBuilder builder;
+bool JoinRoads;
 
 Vgameplay::GameScene::GameScene(std::string name, Vengine::VGame* game) : VScene(name, game),
 MyGridWorld(32, 32, 8, 0)
@@ -46,19 +47,80 @@ void Vgameplay::GameScene::Update(float deltaTime)
 
 	if (IsMouseButtonPressed(0))
 	{
+		auto pos = GetScreenToWorld2D(GetMousePosition(), Camera);
 
+		auto gridPos = MyGridWorld.GetGridPositionFromWorldPosition(pos);
+		auto selectedTiles = MyGridWorld.GetSurroundingTilesFromGridPosition(gridPos);
 
-		/*if (MyGridWorld.SetTileDataWorldPos(pos.x, pos.y, 0))
+		auto atlasPosition = builder.CalculateAtlasIndexForTiling(GameTileSet.get(), selectedTiles);
+
+		if (selectedTiles.CenterTile)
 		{
-			startedPainting = false;
-		}*/
+			selectedTiles.CenterTile->AtlasPosition = atlasPosition;
+			selectedTiles.CenterTile->Type = TileType::path;
+		}
 
+
+		if (selectedTiles.NorthTile && selectedTiles.NorthTile->Type == TileType::path)
+		{
+			auto selectedTilesSecond = MyGridWorld.GetSurroundingTilesFromGridPosition(selectedTiles.NorthTile->GridPosition);
+			auto atlasPosition2 = builder.CalculateAtlasIndexForTiling(GameTileSet.get(), selectedTilesSecond);
+
+
+			selectedTilesSecond.CenterTile->AtlasPosition = atlasPosition2;
+			selectedTilesSecond.CenterTile->Type = TileType::path;
+		}
+
+		if (selectedTiles.EastTile && selectedTiles.EastTile->Type == TileType::path)
+		{
+			auto selectedTilesSecond = MyGridWorld.GetSurroundingTilesFromGridPosition(selectedTiles.EastTile->GridPosition);
+			auto atlasPosition2 = builder.CalculateAtlasIndexForTiling(GameTileSet.get(), selectedTilesSecond);
+
+
+			selectedTilesSecond.CenterTile->AtlasPosition = atlasPosition2;
+			selectedTilesSecond.CenterTile->Type = TileType::path;
+		}
+
+		if (selectedTiles.SouthTile && selectedTiles.SouthTile->Type == TileType::path)
+		{
+			auto selectedTilesSecond = MyGridWorld.GetSurroundingTilesFromGridPosition(selectedTiles.SouthTile->GridPosition);
+			auto atlasPosition2 = builder.CalculateAtlasIndexForTiling(GameTileSet.get(), selectedTilesSecond);
+
+
+			selectedTilesSecond.CenterTile->AtlasPosition = atlasPosition2;
+			selectedTilesSecond.CenterTile->Type = TileType::path;
+		}
+
+		if (selectedTiles.WestTile && selectedTiles.WestTile->Type == TileType::path)
+		{
+			auto selectedTilesSecond = MyGridWorld.GetSurroundingTilesFromGridPosition(selectedTiles.WestTile->GridPosition);
+			auto atlasPosition2 = builder.CalculateAtlasIndexForTiling(GameTileSet.get(), selectedTilesSecond);
+
+
+			selectedTilesSecond.CenterTile->AtlasPosition = atlasPosition2;
+			selectedTilesSecond.CenterTile->Type = TileType::path;
+		}
+
+
+
+
+		startedPainting = false;
 	}
 
-	if(IsMouseButtonDown(0))
+	//	surrounding_tile->AtlasPosition = = GameTileSet->GetIndexFromPosition(15,1);;
+	//	startedPainting = false;
+
+	/*if (MyGridWorld.SetTileDataWorldPos(pos.x, pos.y, 0))
+	{
+		startedPainting = false;
+	}*/
+
+
+
+	if (IsMouseButtonDown(0))
 	{
 		auto pos = GetScreenToWorld2D(GetMousePosition(), Camera);
-		builder.CalculateTiles(MyGridWorld.GetGridPositionFromWorldPosition(pos));
+		builder.CalculateTiles(MyGridWorld.GetGridPositionFromWorldPosition(pos), GameTileSet.get());
 	}
 
 	if (IsMouseButtonReleased(0))
@@ -132,11 +194,13 @@ void Vgameplay::GameScene::Draw()
 		//GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9, 13), MyGridWorld.GetVectorAlignedToGrid(Camera.GetScreenToWorld(GetMousePosition())), raylib::Color(255, 255, 255, 127));
 		for (const auto& selected_tile : builder.SelectedTiles)
 		{
-			GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9,13), MyGridWorld.GetWorldPositionFromGridPosition(selected_tile));
+			GameTileSet->Draw(selected_tile.AtlasPosition, MyGridWorld.GetWorldPositionFromGridPosition(selected_tile.GridPosition));
 		}
 
 		Camera.EndMode();
 
+
+		JoinRoads = GuiCheckBox(raylib::Rectangle(10, 100, 20, 20), "JoinRoads", JoinRoads);
 
 		DrawFPS(0, 0);
 

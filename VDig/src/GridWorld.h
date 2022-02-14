@@ -7,6 +7,20 @@
 
 namespace Vgameplay
 {
+	enum class Direction { north, south, west, east  };
+
+	struct SelectedTiles
+	{
+		SelectedTiles() = default;
+		~SelectedTiles() = default;
+
+		Tile* CenterTile;
+		Tile* NorthTile;
+		Tile* SouthTile;
+		Tile* EastTile;
+		Tile* WestTile;
+	};
+
 	class GridWorld
 	{
 	public:
@@ -103,6 +117,10 @@ namespace Vgameplay
 		 */
 		raylib::Vector2 GetGridPositionFromWorldPosition(raylib::Vector2 worldPosition) const;
 
+		SelectedTiles GetSurroundingTilesFromGridPosition(raylib::Vector2 gridPosition) const;
+
+
+		Tile* GetNeighborhoodTileFromGridPosition(raylib::Vector2 gridPosition, Direction direction) const;
 	};
 
 

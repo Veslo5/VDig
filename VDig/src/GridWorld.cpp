@@ -65,6 +65,57 @@ raylib::Vector2 Vgameplay::GridWorld::GetGridPositionFromWorldPosition(raylib::V
 	return { floor(worldPosition.x / TilesSize), floor(worldPosition.y / TilesSize) };
 }
 
+Vgameplay::SelectedTiles Vgameplay::GridWorld::GetSurroundingTilesFromGridPosition(raylib::Vector2 gridPosition) const
+{
+	SelectedTiles toReturn{};
+
+
+	if (Tile* centerTile = GetTileAtGridPos(gridPosition))
+	{
+		toReturn.CenterTile = centerTile;
+
+		if (Tile* eastTile = GetTileAtGridPos({ gridPosition.x + 1.f, gridPosition.y }))
+		{
+			toReturn.EastTile = eastTile;
+		}
+
+		if (Tile* westTile = GetTileAtGridPos({ gridPosition.x - 1.f, gridPosition.y }))
+		{
+			toReturn.WestTile = westTile;
+		}
+
+		if (Tile* northTile = GetTileAtGridPos({ gridPosition.x, gridPosition.y - 1.f }))
+		{
+			toReturn.NorthTile = northTile;
+		}
+
+		if (Tile* southTile = GetTileAtGridPos({ gridPosition.x, gridPosition.y + 1.f }))
+		{
+			toReturn.SouthTile = southTile;
+		}
+
+	}
+
+	return toReturn;
+}
+
+Vgameplay::Tile* Vgameplay::GridWorld::GetNeighborhoodTileFromGridPosition(raylib::Vector2 gridPosition, Direction direction) const
+{
+	switch (direction)
+	{
+	case Direction::north:
+		return  GetTileAtGridPos({ gridPosition.x, gridPosition.y - 1.f });
+	case Direction::south:
+		return GetTileAtGridPos({ gridPosition.x, gridPosition.y + 1.f });
+	case Direction::east:
+		return GetTileAtGridPos({ gridPosition.x + 1.f, gridPosition.y });
+	case Direction::west:
+		return GetTileAtGridPos({ gridPosition.x - 1.f, gridPosition.y });
+	}
+
+	return nullptr;
+}
+
 
 Vgameplay::Tile* Vgameplay::GridWorld::GetTileAtGridPos(raylib::Vector2 gridPosition) const
 {

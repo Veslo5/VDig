@@ -1,7 +1,9 @@
 ﻿#pragma once
 
 #include <vector>
+#include "GridWorld.h"
 #include "raylib-cpp.hpp"
+#include "VAtlas.h"
 
 namespace Vgameplay
 {
@@ -11,10 +13,12 @@ namespace Vgameplay
 		TileBuilder() = default;
 		~TileBuilder() = default;
 
-		std::vector<raylib::Vector2> SelectedTiles;
+		std::vector<Tile> SelectedTiles;
 
-		void CalculateTiles(raylib::Vector2 currentGridPosition);
+		void CalculateTiles(raylib::Vector2 currentGridPosition, Vengine::VAtlas* atlas);
 		void EndCalculation();
+		int CalculateAtlasIndexForTiling(Vengine::VAtlas* atlas, Vgameplay::SelectedTiles selectedTiles);
+		void CalculateTilingForNeighours(Vengine::VAtlas* atlas);
 
 	private:
 		raylib::Vector2 defaultStartingPos;

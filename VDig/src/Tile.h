@@ -4,7 +4,8 @@
 #include <memory>
 
 namespace Vgameplay {
-	enum class TileDirection {none, up, down, left, right };
+	enum class TileDirection { none, up, down, left, right };
+	enum class TileType { blank, wall, path };
 
 	class Tile
 	{
@@ -17,6 +18,7 @@ namespace Vgameplay {
 		const int Size;
 		int AtlasPosition;
 		TileDirection Direction;
+		TileType Type;
 
 	private:
 
