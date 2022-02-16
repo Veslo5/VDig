@@ -1,6 +1,6 @@
 ﻿#include "TileBuilder.h"
 
-void Vgameplay::TileBuilder::CalculateTiles(raylib::Vector2 currentGridPosition, Vengine::VAtlas* atlas)
+void Vgameplay::TileBuilder::CalculateTiles(Vengine::VPoint currentGridPosition, Vengine::VAtlas* atlas)
 {
 	//Set starting position until "done" function is called.
 	if (isStarted == false)

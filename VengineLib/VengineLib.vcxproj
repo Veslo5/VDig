@@ -171,6 +171,7 @@
     <ClInclude Include="include\VGame.h" />
     <ClInclude Include="include\VObjectHolder.h" />
     <ClInclude Include="include\VPersistentData.h" />
+    <ClInclude Include="include\VPoint.h" />
     <ClInclude Include="include\VScene.h" />
     <ClInclude Include="include\VTimer.h" />
   </ItemGroup>

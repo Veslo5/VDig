@@ -190,7 +190,7 @@ void Vgameplay::GameScene::Draw()
 		Game->ClearBackground();
 
 		Camera.BeginMode();
-		DrawTextureRec(RenderTexture->texture, raylib::Rectangle(0, 0, RenderTexture->texture.width, -RenderTexture->texture.height), raylib::Vector2(0, 0), raylib::Color::White());
+		DrawTextureRec(RenderTexture->texture, raylib::Rectangle(0, 0, static_cast<float>(RenderTexture->texture.width), static_cast<float>(-RenderTexture->texture.height)), raylib::Vector2(0, 0), raylib::Color::White());
 		//GameTileSet->Draw(GameTileSet->GetIndexFromPosition(9, 13), MyGridWorld.GetVectorAlignedToGrid(Camera.GetScreenToWorld(GetMousePosition())), raylib::Color(255, 255, 255, 127));
 		for (const auto& selected_tile : builder.SelectedTiles)
 		{
@@ -237,7 +237,7 @@ void Vgameplay::GameScene::generateGrid()
 		tile_world->AtlasPosition = 0;
 
 
-		const float treeF = noiseTrees.GetNoise(tile_world->GridPosition.x, tile_world->GridPosition.y);
+		const float treeF = noiseTrees.GetNoise(static_cast<float>(tile_world->GridPosition.x), static_cast<float>(tile_world->GridPosition.y));
 
 		if (treeF < 0.1f)
 		{
@@ -250,7 +250,7 @@ void Vgameplay::GameScene::generateGrid()
 		else
 		{
 		}
-		const float goldF = noiseGold.GetNoise(tile_world->GridPosition.x, tile_world->GridPosition.y);
+		const float goldF = noiseGold.GetNoise(static_cast<float>(tile_world->GridPosition.x), static_cast<float>(tile_world->GridPosition.y));
 
 
 		if (goldF > 0.1f)

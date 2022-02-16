@@ -65,7 +65,7 @@ namespace Vgameplay
 		 * \param newAtlasPosition atlas sprite index
 		 * \return true if data changed successfully, false if not
 		 */
-		bool SetTileDataGridPos(raylib::Vector2 gridPosition, int newAtlasPosition);
+		bool SetTileDataGridPos(Vengine::VPoint gridPosition, int newAtlasPosition) const;
 
 		/**
 		 * \brief Safe tile data changing
@@ -73,7 +73,7 @@ namespace Vgameplay
 		 * \param newAtlasPosition atlas sprite index
 		 * \return true if data changed successfully, false if not
 		 */
-		bool SetTileDataWorldPos(raylib::Vector2 worldPosition, int newAtlasPosition);
+		bool SetTileDataWorldPos(raylib::Vector2 worldPosition, int newAtlasPosition) const;
 
 		/**
 		 * \brief Check if tile exists on grid coordinates
@@ -87,7 +87,7 @@ namespace Vgameplay
 		 * \param gridPosition WARNING: gridPosition must be rounded!
 		 * \return Weak pointer to Tile object from TileWorld, if no tile is found, nullptr is returned
 		 */
-		Tile* GetTileAtGridPos(raylib::Vector2 gridPosition) const;
+		Tile* GetTileAtGridPos(Vengine::VPoint gridPosition) const;
 
 		/**
 		 * \brief Gets tile by world coordinates
@@ -108,19 +108,19 @@ namespace Vgameplay
 		 * \param gridPosition WARNING: gridPosition must be rounded!
 		 * \return world coordinates
 		 */
-		raylib::Vector2 GetWorldPositionFromGridPosition(raylib::Vector2 gridPosition) const;
+		raylib::Vector2 GetWorldPositionFromGridPosition(Vengine::VPoint gridPosition) const;
 
 		/**
 		 * \brief Convert world position to grid position
 		 * \param worldPosition world coordinates
 		 * \return grid coordinates
 		 */
-		raylib::Vector2 GetGridPositionFromWorldPosition(raylib::Vector2 worldPosition) const;
+		Vengine::VPoint GetGridPositionFromWorldPosition(raylib::Vector2 worldPosition) const;
 
-		SelectedTiles GetSurroundingTilesFromGridPosition(raylib::Vector2 gridPosition) const;
+		SelectedTiles GetSurroundingTilesFromGridPosition(Vengine::VPoint gridPosition) const;
 
 
-		Tile* GetNeighborhoodTileFromGridPosition(raylib::Vector2 gridPosition, Direction direction) const;
+		Tile* GetNeighborhoodTileFromGridPosition(Vengine::VPoint gridPosition, Direction direction) const;
 	};
 
 

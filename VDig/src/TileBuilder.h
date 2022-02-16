@@ -15,14 +15,14 @@ namespace Vgameplay
 
 		std::vector<Tile> SelectedTiles;
 
-		void CalculateTiles(raylib::Vector2 currentGridPosition, Vengine::VAtlas* atlas);
+		void CalculateTiles(Vengine::VPoint currentGridPosition, Vengine::VAtlas* atlas);
 		void EndCalculation();
 		int CalculateAtlasIndexForTiling(Vengine::VAtlas* atlas, Vgameplay::SelectedTiles selectedTiles);
 		void CalculateTilingForNeighours(Vengine::VAtlas* atlas);
 
 	private:
-		raylib::Vector2 defaultStartingPos;
-		raylib::Vector2 currentEndingPosition;
+		Vengine::VPoint defaultStartingPos;
+		Vengine::VPoint currentEndingPosition;
 		bool isStarted;
 	};
 
